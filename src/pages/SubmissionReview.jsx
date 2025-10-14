@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from '../components/Sidebar';
+import { API_BASE_URL } from '../config/api.js';
 
 const SubmissionReview = ({ onLogout }) => {
     const { campaignId } = useParams();
@@ -23,7 +24,7 @@ const SubmissionReview = ({ onLogout }) => {
 
     const fetchCampaignDetails = async () => {
         try {
-            const response = await axios.get(`http://localhost:3033/api/campaigns/admin/${campaignId}`);
+            const response = await axios.get(`${API_BASE_URL}/api/campaigns/admin/${campaignId}`);
             if (response.data.success) {
                 setCampaign(response.data.campaign);
                 setSubmissions(response.data.submissions || []);
@@ -37,7 +38,7 @@ const SubmissionReview = ({ onLogout }) => {
 
     const handleRate = async (submissionId, prizePosition = null) => {
         try {
-            await axios.put(`http://localhost:3033/api/campaigns/admin/submission/${submissionId}/rate`, {
+            await axios.put(`${API_BASE_URL}/api/campaigns/admin/submission/${submissionId}/rate`, {
                 rating,
                 notes,
                 prize_position: prizePosition
@@ -66,7 +67,7 @@ const SubmissionReview = ({ onLogout }) => {
 
         setDistributing(true);
         try {
-            const response = await axios.post(`http://localhost:3033/api/campaigns/admin/distribute-prizes`, {
+            const response = await axios.post(`${API_BASE_URL}/api/campaigns/admin/distribute-prizes`, {
                 campaign_id: campaignId,
                 first_winner_id: firstWinner,
                 second_winner_id: secondWinner

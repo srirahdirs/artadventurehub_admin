@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from '../components/Sidebar';
+import { API_BASE_URL } from '../config/api.js';
 
 const AdminDashboard = ({ onLogout }) => {
     const [stats, setStats] = useState({
@@ -20,7 +21,7 @@ const AdminDashboard = ({ onLogout }) => {
     const fetchStats = async () => {
         try {
             console.log('📊 Fetching admin stats...');
-            const response = await axios.get('http://localhost:3033/api/campaigns/admin/stats');
+            const response = await axios.get(`${API_BASE_URL}/api/campaigns/admin/stats`);
             console.log('📊 Stats response:', response.data);
             if (response.data.success) {
                 console.log('✅ Setting stats:', response.data.stats);

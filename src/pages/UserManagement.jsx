@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Sidebar from '../components/Sidebar';
+import { API_BASE_URL } from '../config/api.js';
 
 const UserManagement = ({ onLogout }) => {
     const [users, setUsers] = useState([]);
@@ -13,7 +14,7 @@ const UserManagement = ({ onLogout }) => {
 
     const fetchUsers = async () => {
         try {
-            const response = await axios.get('http://localhost:3033/api/users');
+            const response = await axios.get(`${API_BASE_URL}/api/users`);
             if (response.data.success) {
                 setUsers(response.data.users);
             }

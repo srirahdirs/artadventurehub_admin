@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from '../components/Sidebar';
+import { API_BASE_URL } from '../config/api.js';
 
 const CampaignManagement = ({ onLogout }) => {
     const navigate = useNavigate();
@@ -16,8 +17,8 @@ const CampaignManagement = ({ onLogout }) => {
     const fetchCampaigns = async () => {
         try {
             const url = filter === 'all'
-                ? 'http://localhost:3033/api/campaigns/admin/all'
-                : `http://localhost:3033/api/campaigns/admin/all?status=${filter}`;
+                ? `${API_BASE_URL}/api/campaigns/admin/all`
+                : `${API_BASE_URL}/api/campaigns/admin/all?status=${filter}`;
 
             const response = await axios.get(url);
             if (response.data.success) {
@@ -32,7 +33,7 @@ const CampaignManagement = ({ onLogout }) => {
 
     const handleStatusChange = async (id, newStatus) => {
         try {
-            await axios.patch(`http://localhost:3033/api/campaigns/admin/${id}/status`, {
+            await axios.patch(`${API_BASE_URL}/api/campaigns/admin/${id}/status`, {
                 status: newStatus
             });
             fetchCampaigns();
@@ -45,7 +46,7 @@ const CampaignManagement = ({ onLogout }) => {
         if (!window.confirm('Are you sure you want to delete this campaign?')) return;
 
         try {
-            await axios.delete(`http://localhost:3033/api/campaigns/admin/${id}`);
+            await axios.delete(`${API_BASE_URL}/api/campaigns/admin/${id}`);
             fetchCampaigns();
         } catch (err) {
             alert(err.response?.data?.message || 'Error deleting campaign');
@@ -61,11 +62,11 @@ const CampaignManagement = ({ onLogout }) => {
 
         // Check if winners have been set
         try {
-            const response = await axios.get(`http://localhost:3033/api/campaigns/admin/${campaign._id}`);
+            const response = await axios.get(`${API_BASE_URL}/api/campaigns/admin/${campaign._id}`);
             const campaignData = response.data.campaign;
 
             // Check if any submissions have winner status
-            const submissionsResponse = await axios.get(`http://localhost:3033/api/campaigns/${campaign._id}/participants`);
+            const submissionsResponse = await axios.get(`${API_BASE_URL}/api/campaigns/${campaign._id}/participants`);
             const submissions = submissionsResponse.data.participants || [];
 
             const hasWinners = submissions.some(sub => sub.status === 'winner' || sub.status === 'runner_up');
@@ -194,7 +195,7 @@ const CampaignManagement = ({ onLogout }) => {
                                                         <img
                                                             src={campaign.reference_image.startsWith('http')
                                                                 ? campaign.reference_image
-                                                                : `http://localhost:3033${campaign.reference_image}`
+                                                                : `${API_BASE_URL}${campaign.reference_image}`
                                                             }
                                                             alt={campaign.name}
                                                             className="w-12 h-12 rounded object-cover mr-3"

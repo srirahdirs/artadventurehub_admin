@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from '../components/Sidebar';
+import { API_BASE_URL } from '../config/api.js';
 
 const EditCampaign = ({ onLogout }) => {
     const navigate = useNavigate();
@@ -42,7 +43,7 @@ const EditCampaign = ({ onLogout }) => {
     const fetchCampaign = async () => {
         try {
             setFetchLoading(true);
-            const response = await axios.get(`http://localhost:3033/api/campaigns/admin/${id}`);
+            const response = await axios.get(`${API_BASE_URL}/api/campaigns/admin/${id}`);
             if (response.data.success) {
                 const campaign = response.data.campaign;
                 setForm({
@@ -117,7 +118,7 @@ const EditCampaign = ({ onLogout }) => {
                 const formData = new FormData();
                 formData.append('image', selectedFile);
 
-                const uploadResponse = await axios.post('http://localhost:3033/api/upload/image', formData, {
+                const uploadResponse = await axios.post(`${API_BASE_URL}/api/upload/image`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
@@ -136,7 +137,7 @@ const EditCampaign = ({ onLogout }) => {
                 reference_image: imageUrl
             };
 
-            const response = await axios.put(`http://localhost:3033/api/campaigns/admin/${id}`, campaignData);
+            const response = await axios.put(`${API_BASE_URL}/api/campaigns/admin/${id}`, campaignData);
 
             if (response.data.success) {
                 setSuccess('Campaign updated successfully!');

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Sidebar from '../components/Sidebar';
+import { API_BASE_URL } from '../config/api.js';
 
 const WithdrawalManagement = ({ onLogout }) => {
     const [withdrawals, setWithdrawals] = useState([]);
@@ -19,7 +20,7 @@ const WithdrawalManagement = ({ onLogout }) => {
     const fetchWithdrawals = async () => {
         try {
             setLoading(true);
-            const response = await axios.get(`http://localhost:3033/api/withdrawals/admin/all?status=${filter}`);
+            const response = await axios.get(`${API_BASE_URL}/api/withdrawals/admin/all?status=${filter}`);
             if (response.data.success) {
                 setWithdrawals(response.data.withdrawals);
             }
@@ -51,7 +52,7 @@ const WithdrawalManagement = ({ onLogout }) => {
             };
 
             const response = await axios.put(
-                `http://localhost:3033/api/withdrawals/admin/${selectedWithdrawal.id}/process`,
+                `${API_BASE_URL}/api/withdrawals/admin/${selectedWithdrawal.id}/process`,
                 requestData
             );
 

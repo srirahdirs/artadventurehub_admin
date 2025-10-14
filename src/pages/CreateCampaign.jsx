@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from '../components/Sidebar';
+import { API_BASE_URL } from '../config/api.js';
 
 const CreateCampaign = ({ onLogout }) => {
     const navigate = useNavigate();
@@ -68,7 +69,7 @@ const CreateCampaign = ({ onLogout }) => {
         const formData = new FormData();
         formData.append('image', file);
 
-        const response = await axios.post('http://localhost:3033/api/upload', formData, {
+        const response = await axios.post(`${API_BASE_URL}/api/upload`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
@@ -99,7 +100,7 @@ const CreateCampaign = ({ onLogout }) => {
                 reference_image: imageUrl
             };
 
-            const response = await axios.post('http://localhost:3033/api/campaigns/admin/create', formData);
+            const response = await axios.post(`${API_BASE_URL}/api/campaigns/admin/create`, formData);
 
             if (response.data.success) {
                 setSuccess('Campaign created successfully!');
