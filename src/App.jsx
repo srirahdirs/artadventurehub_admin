@@ -8,6 +8,7 @@ import EditCampaign from './pages/EditCampaign';
 import UserManagement from './pages/UserManagement';
 import SubmissionReview from './pages/SubmissionReview';
 import WithdrawalManagement from './pages/WithdrawalManagement';
+import CouponManagement from './pages/CouponManagement';
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(
@@ -38,6 +39,7 @@ function App() {
                         <Route path="/campaigns" element={<CampaignManagement onLogout={handleLogout} />} />
                         <Route path="/campaigns/create" element={<CreateCampaign onLogout={handleLogout} />} />
                         <Route path="/campaigns/edit/:id" element={<EditCampaign onLogout={handleLogout} />} />
+                        <Route path="/coupons" element={<CouponManagement onLogout={handleLogout} />} />
                         <Route path="/users" element={<UserManagement onLogout={handleLogout} />} />
                         <Route path="/submissions/:campaignId" element={<SubmissionReview onLogout={handleLogout} />} />
                         <Route path="/withdrawals" element={<WithdrawalManagement onLogout={handleLogout} />} />

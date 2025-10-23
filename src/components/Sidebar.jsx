@@ -5,6 +5,7 @@ const Sidebar = ({ currentPage, onLogout }) => {
     const menuItems = [
         { id: 'dashboard', label: 'Dashboard', icon: '📊', path: '/' },
         { id: 'campaigns', label: 'Campaigns', icon: '🎨', path: '/campaigns' },
+        { id: 'coupons', label: 'Coupons', icon: '🎟️', path: '/coupons' },
         { id: 'users', label: 'Users', icon: '👥', path: '/users' },
         { id: 'withdrawals', label: 'Withdrawals', icon: '💰', path: '/withdrawals' },
     ];
