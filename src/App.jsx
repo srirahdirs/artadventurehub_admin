@@ -9,6 +9,7 @@ import UserManagement from './pages/UserManagement';
 import SubmissionReview from './pages/SubmissionReview';
 import WithdrawalManagement from './pages/WithdrawalManagement';
 import CouponManagement from './pages/CouponManagement';
+import NotificationManagement from './pages/NotificationManagement';
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(
@@ -41,6 +42,7 @@ function App() {
                         <Route path="/campaigns/edit/:id" element={<EditCampaign onLogout={handleLogout} />} />
                         <Route path="/coupons" element={<CouponManagement onLogout={handleLogout} />} />
                         <Route path="/users" element={<UserManagement onLogout={handleLogout} />} />
+                        <Route path="/notifications" element={<NotificationManagement onLogout={handleLogout} />} />
                         <Route path="/submissions/:campaignId" element={<SubmissionReview onLogout={handleLogout} />} />
                         <Route path="/withdrawals" element={<WithdrawalManagement onLogout={handleLogout} />} />
                         <Route path="*" element={<Navigate to="/" />} />

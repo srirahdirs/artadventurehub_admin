@@ -101,7 +101,7 @@ const AdminDashboard = ({ onLogout }) => {
                     </div>
 
                     {/* Quick Actions */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         <Link
                             to="/campaigns/create"
                             className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition group"
@@ -128,6 +128,21 @@ const AdminDashboard = ({ onLogout }) => {
                                 <div>
                                     <h3 className="font-bold text-gray-900">Manage Campaigns</h3>
                                     <p className="text-sm text-gray-600">View and edit contests</p>
+                                </div>
+                            </div>
+                        </Link>
+
+                        <Link
+                            to="/notifications"
+                            className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition group"
+                        >
+                            <div className="flex items-center">
+                                <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-4 group-hover:bg-red-200 transition">
+                                    <span className="text-2xl">🔔</span>
+                                </div>
+                                <div>
+                                    <h3 className="font-bold text-gray-900">Send Notifications</h3>
+                                    <p className="text-sm text-gray-600">Push to users</p>
                                 </div>
                             </div>
                         </Link>
